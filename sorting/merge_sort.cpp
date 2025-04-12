@@ -1,48 +1,46 @@
-// Merge Sort Algorithm
-// Time Complexity: O(n log n)
-// Space Complexity: O(n)
+// // Merge Sort Algorithm
+// // Time Complexity: O(n log n)
+// // Space Complexity: O(n)
 
-#include <iostream>
-#include <vector>
-
+#include<iostream>
+#include<vector>
 using namespace std;
 
-// Function to merge two halves
-void merge(vector<int>& arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;    
-
-    vector<int> L(n1), R(n2);
-
-    for (int i = 0; i < n1; ++i)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; ++j)
-        R[j] = arr[mid + 1 + j];
-
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j])
-            arr[k++] = L[i++];
-        else
-            arr[k++] = R[j++];
-    }
-
-    while (i < n1)
-        arr[k++] = L[i++];
-    while (j < n2)
-        arr[k++] = R[j++];
+void merge(vector<int>&arr,int l,int mid,int h){
+       vector<int>b;
+       int i=l;
+       int j=mid+1;
+       while(i<=mid && j<=h){
+         if(arr[i]<arr[j]){
+             b.push_back(arr[i]);
+             i++;
+         }
+         else{
+            b.push_back(arr[j]);
+            j++;
+         }
+       }
+       while(i<=mid){
+         b.push_back(arr[i]);
+         i++;
+       }
+       while(j<=h){
+         b.push_back(arr[j]);
+         j++;
+       }
+       for(int i=l;i<=h;i++){
+          arr[i]=b[i-l];
+       }
 }
 
-// Merge Sort function
-void mergeSort(vector<int>& arr, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-
-        merge(arr, left, mid, right);
-    }
+void mergeSort(vector<int>&arr,int l,int h){
+       if(l>=h){
+        return ;
+       }
+       int mid=(l+h)/2;
+       mergeSort(arr,l,mid);
+       mergeSort(arr,mid+1,h);
+       merge(arr,l,mid,h);
 }
 
 int main(){
