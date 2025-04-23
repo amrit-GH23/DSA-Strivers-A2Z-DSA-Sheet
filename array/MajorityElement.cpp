@@ -1,3 +1,7 @@
+//Majority Element
+//Time Complexity : O(n)
+//Space Complexity: O(n)
+
 #include<iostream>
 #include<vector>
 #include<unordered_map>
